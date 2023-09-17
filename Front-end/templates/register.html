@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/main.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='main.css')}}">
     <title>Registration</title>
 </head>
 <body>
@@ -15,7 +15,11 @@
             <h3>Patient Registration</h3><br>
             <p>Please fill out the required fields to create an account.</p><br><br>
         </div>
-        <form action="/register" method="POST">
+        <form action="{{url_for('register')}}" method="POST">
+            {% if msg is defined and msg %}
+            <label>{{msg}}</label>
+            {% endif %}
+
             <label for="firstName">First Name:</label>
             <input type="text" id="firstName" name="firstName" required><br><br>
 
@@ -35,6 +39,7 @@
             <input type="password" id="password" name="password" required><br><br>
             
             <input type="submit" value="Submit">
+            <a href="{{url_for('login')}}">Login if registered</a>
         </form>
     </center>
 </body>
